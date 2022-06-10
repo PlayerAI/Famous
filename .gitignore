@@ -1,0 +1,14 @@
+.idea
+.fake
+.ionide
+.vscode
+# compiled files
+obj
+bin
+# user files
+.user
+.suo
+.vs
+Logs
+*.xlsx
+*.csv
