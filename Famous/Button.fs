@@ -30,7 +30,7 @@ type Button_Parameters=
             Button_color=None
             Attributes=[]
             Children=[]
-            Id=Kit.getRandomString(12)
+            Id=Kit.getRandomString(24)
         }
 [<RequireQualifiedAccess>]
 module Button=

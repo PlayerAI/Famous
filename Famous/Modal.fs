@@ -44,7 +44,7 @@ type Modal_parameter=
             Content=[]
             Actions=[]
             Center_aligned=false
-            Id=Kit.getRandomString(12)
+            Id=Kit.getRandomString(24)
         }
 [<RequireQualifiedAccess>]
 module Modal=

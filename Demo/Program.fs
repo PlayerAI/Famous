@@ -49,7 +49,7 @@ let page button_showcases_list=
             
         ]    // <body></body>
 let handlerWithHeader button_showcases_list : HttpHandler =
-    Response.withHeader "Content-Language" "en-us"
+    Response.withHeader "Content-Language"  "zh-cn"  // "en-us"
     >> Response.ofHtml (page button_showcases_list)
 
 
@@ -58,6 +58,7 @@ let index_page =
         Elem.div [Attr.class' "ui bulleted list"] [
             Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/button"] [Text.raw "Button showcases"] ]
             Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/modal"] [Text.raw "modal showcases"] ]
+            Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/input_demo"] [Text.raw "input demo"] ]
         
         ]
     ] 
@@ -71,6 +72,7 @@ let main args =
             get "/" (handlerWithHeader index_page)
             get "/button" (handlerWithHeader Button_demo.button_demo)
             get "/modal" (handlerWithHeader Modal_demo.modal_demo)
+            get "/input_demo" (handlerWithHeader Input_demo.input_demo)
         ]
     }
     0
