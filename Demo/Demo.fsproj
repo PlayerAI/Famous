@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Views\Button_demo.fs" />
+    <Compile Include="Views\Modal_demo.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   

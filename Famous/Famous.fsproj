@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Kit.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Template.fs" />
     <Compile Include="Button.fs" />
+    <Compile Include="Modal.fs" />
   </ItemGroup>
 
   <ItemGroup>

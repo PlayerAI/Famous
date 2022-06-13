@@ -5,6 +5,7 @@ open Falco.Routing
 open Falco.HostBuilder
 open Microsoft.AspNetCore.Builder
 open Falco.Markup
+open Famous
 // ------------
 // Exception Handler
 // ------------
@@ -50,25 +51,13 @@ let page button_showcases_list=
 let handlerWithHeader button_showcases_list : HttpHandler =
     Response.withHeader "Content-Language" "en-us"
     >> Response.ofHtml (page button_showcases_list)
-let par:Famous.Button_Parameters= 
-    {
-        Button_text = "text"
-        Button_type=None
-        Button_color=None 
-        Children=None
-        Attributes=None
-    }
-let button_demo = 
-    Famous.Element_color.GetAll()
-    |>List.map (fun i ->
-        let p_local={par with Button_color =Some i;Button_text=i.ToString().ToUpper()}
-        Famous.Button.makes p_local
-        )
+
+
 let index_page =
     [
         Elem.div [Attr.class' "ui bulleted list"] [
             Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/button"] [Text.raw "Button showcases"] ]
-            Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/button"] [Text.raw "Button showcases"] ]
+            Elem.div [Attr.class' "item"] [Elem.a [Attr.href "/modal"] [Text.raw "modal showcases"] ]
         
         ]
     ] 
@@ -80,7 +69,8 @@ let main args =
         use_static_files
         endpoints [            
             get "/" (handlerWithHeader index_page)
-            get "/button" (handlerWithHeader button_demo)
+            get "/button" (handlerWithHeader Button_demo.button_demo)
+            get "/modal" (handlerWithHeader Modal_demo.modal_demo)
         ]
     }
     0
