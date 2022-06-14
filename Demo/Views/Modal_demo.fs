@@ -44,3 +44,6 @@ let modal_demo =
             Famous.Modal.connect model_par2.Id b_basic2.Id
             ]
     ]
+let handler: HttpHandler=
+    Response.withHeader "Content-Language"  "zh-cn"  // "en-us"
+    >> Response.ofHtml (Site_template.page modal_demo)

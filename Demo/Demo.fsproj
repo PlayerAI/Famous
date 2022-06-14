@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Views\Site_template.fs" />
     <Compile Include="Views\Button_demo.fs" />
     <Compile Include="Views\Modal_demo.fs" />
     <Compile Include="Views\Input_demo.fs" />
+    <Compile Include="Views\Communicate_demo.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   

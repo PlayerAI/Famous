@@ -28,4 +28,6 @@ let input_demo =
         Kit.run_script_when_input input_id when_changed
     ]
     |>fun i -> [i]
-
+let handler: HttpHandler=
+    Response.withHeader "Content-Language"  "zh-cn"  // "en-us"
+    >> Response.ofHtml (Site_template.page input_demo)

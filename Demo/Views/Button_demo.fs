@@ -1,6 +1,11 @@
 ﻿module Button_demo
-open Famous
 
+open Falco
+open Falco.Routing
+open Falco.HostBuilder
+open Microsoft.AspNetCore.Builder
+open Falco.Markup
+open Famous
 let get_script (target_id) (button_name)=
     let s =
         sprintf
@@ -27,4 +32,6 @@ let button_demo =
                     }
         Famous.Button.make p_local
         )
-
+let handler: HttpHandler=
+    Response.withHeader "Content-Language"  "zh-cn"  // "en-us"
+    >> Response.ofHtml (Site_template.page button_demo)
