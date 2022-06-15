@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="JS.fs" />
     <Compile Include="Kit.fs" />
     <Compile Include="Color.fs" />
     <Compile Include="Template.fs" />

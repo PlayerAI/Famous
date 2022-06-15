@@ -8,13 +8,7 @@ open Famous
 let modal_demo = 
     let model_par =Famous.Modal_parameter.empty("基本的Modal")
     //let model_ = Famous.Modal.make_basic(model_par)
-    let button_par_empty=Famous.Button_Parameters.empty("empty")
-    let b_basic={
-                    button_par_empty 
-                        with 
-                            Button_color =Some Famous.Element_color.Orange;
-                            Button_text="基本的Modal";                            
-                }    
+    let button_1_id = Kit.getId()       
     //------------------
     let model_par2 =Famous.Modal_parameter.empty("基本的Modal2")
     let model_2 = 
@@ -24,24 +18,17 @@ let modal_demo =
                 Modal_parameter.Actions=[Modal_action.Approve "button 1";Modal_action.Deny "button 2"]
                 Modal_parameter.Content=[Text.raw "Are you Ok? 你还好吗?"]
         }
-    let button_par_empty2=Famous.Button_Parameters.empty("empty")
-    let b_basic2={
-                    button_par_empty2 
-                        with 
-                            Button_color =Some Famous.Element_color.Red;
-                            Button_text="基本的Modal2";
-                            
-                }
+    let button_2_id = Kit.getId()     
     [
         Elem.div [ ] [ 
-            Famous.Button.make b_basic
+            Famous.Button.make "基本Model" [B_Color Red] [Attr.id button_1_id] []
             Famous.Modal.make_basic(model_par)
-            Famous.Modal.connect model_par.Id b_basic.Id
+            Famous.Modal.trigger_modal_by model_par.Id button_1_id
             ]
         Elem.div [ ] [ 
-            Famous.Button.make b_basic2
+            Famous.Button.make "基本Model" [B_Color Green] [Attr.id button_2_id] []
             Famous.Modal.make_basic model_2
-            Famous.Modal.connect model_par2.Id b_basic2.Id
+            Famous.Modal.trigger_modal_by model_par2.Id button_2_id
             ]
     ]
 let handler: HttpHandler=

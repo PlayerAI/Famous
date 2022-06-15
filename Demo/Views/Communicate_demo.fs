@@ -10,11 +10,10 @@ open System.Text.Json.Serialization
 let mutable summary=0
 let mutable plus=1
 let communicate_demo() = 
-    let button1_id=Kit.getRandomString(24)
-    let button2_id=Kit.getRandomString(24) 
-    let input_id=Kit.getRandomString(24)
-    let header_id=Kit.getRandomString(24)
-    let par=Famous.Button_Parameters.empty("empty")    
+    let button1_id=Kit.getId()
+    let button2_id=Kit.getId() 
+    let input_id=Kit.getId()
+    let header_id=Kit.getId()      
     let click_event action input_id button_id= 
         let script=
             sprintf 
@@ -26,11 +25,10 @@ let communicate_demo() =
                 window.location.href = l;
                 """ input_id action
         //"""window.location.href = "b.html?id=1";"""
-        Kit.run_script_when_click button_id script
+        JS.run_script_when_click button_id script
     Elem.div [ ] [ 
         //echo here
-        Elem.h1 [Attr.class' "ui header";Attr.id header_id] [Text.raw (string summary)]
-        //Kit.run_script_when_input input_id when_changed
+        Elem.h1 [Attr.class' "ui header";Attr.id header_id] [Text.raw (string summary)]        
         //input here
         Elem.div [Attr.class' "ui input"] [
             Elem.input [
@@ -40,14 +38,11 @@ let communicate_demo() =
                 Attr.value (string plus)
                 ] 
         ]
-        Button.make {par with Id=button1_id;Button_text="-";Children=[click_event "Subtracting" input_id button1_id]}
-        Button.make {par with Id=button2_id;Button_text="+";Children=[click_event "Adding" input_id button2_id]}
+        Button.make "-" [] [Attr.id button1_id] [click_event "Subtracting" input_id button1_id] 
+        Button.make "+" [] [Attr.id button2_id] [click_event "Adding" input_id button2_id] 
+        
     ]
     |>fun i -> [i]
-////[<CLIMutable>]
-//type Communicate_action_type =
-//    |Adding 
-//    |Subtracting
 [<CLIMutable>]
 type QueryParameters =
     {

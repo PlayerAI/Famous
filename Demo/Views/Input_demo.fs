@@ -25,7 +25,7 @@ let input_demo =
         ]
         //echo here
         Elem.h1 [Attr.class' "ui header";Attr.id target_id] [Text.raw ""]
-        Kit.run_script_when_input input_id when_changed
+        JS.run_script_when_input input_id when_changed
     ]
     |>fun i -> [i]
 let handler: HttpHandler=

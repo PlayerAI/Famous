@@ -86,7 +86,7 @@ module Modal=
                 Text.raw """$('.ui.modal').modal();"""
                 ]
         ] 
-    let connect (modal_id) (trigger_by_id:string)= 
+    let trigger_modal_by (modal_id) (trigger_by_id:string)= 
         Elem.script [] [    
             Text.rawf """
                 $("#%s").click(function(){

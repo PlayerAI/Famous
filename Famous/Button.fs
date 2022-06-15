@@ -1,43 +1,44 @@
 ﻿namespace Famous
 open Falco.Markup
 open Falco
-type Button_type=
+type Button_Attribute_Keyword=
     |Inverted
     |Tertiary
     |Basic
     |Labeled
     |Primary
+    |Secondary
+    //|Animated
+    |Fade
+    |Vertical 
+    |B_Color of Element_color    
     override t.ToString()=
         match t with
-        |Inverted -> "inverted"
-        |Tertiary-> "tertiary"
-        |Basic-> "basic"
-        |Labeled-> "labeled"
-        |Primary-> "primary"
-type Button_Parameters=
-    {
-        Button_text:string
-        Button_type:Button_type option
-        Button_color:Element_color option
-        Attributes:XmlAttribute list
-        Children:XmlNode list
-        Id:string 
-    }
-    static member empty(button_text) =
-        {
-            Button_text=button_text
-            Button_type=None
-            Button_color=None
-            Attributes=[]
-            Children=[]
-            Id=Kit.getRandomString(24)
-        }
+        |Inverted -> " inverted"
+        |Tertiary-> " tertiary"
+        |Basic-> " basic"
+        |Labeled-> " labeled"
+        |Secondary-> " secondary"
+        |Primary-> " primary"
+        //|Animated-> " animated"
+        |Fade-> " fade"
+        |Vertical -> " vertical"
+        |B_Color c -> " "+c.ToString()
+        
+
 [<RequireQualifiedAccess>]
-module Button=
-    let make (pars:Button_Parameters) =
-        let color_ = defaultArg (pars.Button_color|>Option.map (fun i -> i.ToString())) ""
-        let type_ = defaultArg (pars.Button_type|>Option.map (fun i -> i.ToString())) ""
-        let par= [Attr.class' $"ui %s{color_} %s{type_} button";Attr.id pars.Id]
-        let atts_list= par @ pars.Attributes
-        let children_list =pars.Children @ [ Text.raw pars.Button_text   ]            
+module Button= 
+    let make (button_text:string) (class_:Button_Attribute_Keyword list) atts_list children_list=
+        let cls= 
+            class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" button"|> Attr.class'        
+        let atts_list= [cls] @ atts_list          
+        let children_list =children_list @ [ Text.raw button_text   ]            
         Elem.div atts_list children_list
+    let make_animated (class_:Button_Attribute_Keyword list) atts_list (hidden:XmlNode) (visible :XmlNode)=
+        let cls= 
+            class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" animated button"|> Attr.class'
+        let atts_list= [cls;Attr.create "tabindex" "0"] @ atts_list
+        Elem.div atts_list [
+            Elem.div [Attr.class' "hidden content"] [hidden]
+            Elem.div [Attr.class' "visible content"] [visible]
+            ]
