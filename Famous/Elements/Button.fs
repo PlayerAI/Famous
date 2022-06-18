@@ -1,7 +1,7 @@
 ﻿namespace Famous
 open Falco.Markup
 open Falco
-type Button_Attribute_Keyword=
+type Button_cls=
     |Inverted
     |Tertiary
     |Basic
@@ -25,6 +25,8 @@ type Button_Attribute_Keyword=
     |Stackable 
     |Loading
     |Disable
+    |Approve
+    |Deny
     override t.ToString()=
         match t with
         |Inverted -> " inverted"
@@ -49,19 +51,21 @@ type Button_Attribute_Keyword=
         |Circular -> " circular"
         |Stackable -> " stackable"
         |Loading -> " loading"
-        |Disable -> " dsable"
+        |Disable -> " disable"
+        |Approve-> " approve"
+        |Deny-> " deny"
 
 
 [<RequireQualifiedAccess>]
 module Button= 
-    let make (button_text:string) (class_:Button_Attribute_Keyword list) atts_list children_list=
+    let make (button_text:string) (class_:Button_cls list) atts_list children_list=
         let cls= 
             class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" button"|> Attr.class'        
         let atts_list= [cls] @ atts_list          
         let children_list =children_list @ [ Text.raw button_text   ]            
         Elem.div atts_list children_list
     /// class: [Vertical;Fade]
-    let make_animated (class_:Button_Attribute_Keyword list) atts_list (hidden:XmlNode) (visible :XmlNode)=
+    let make_animated (class_:Button_cls list) atts_list (hidden:XmlNode) (visible :XmlNode)=
         let cls= 
             class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" animated button"|> Attr.class'
         let atts_list= [cls;Attr.create "tabindex" "0"] @ atts_list
@@ -70,7 +74,7 @@ module Button=
             Elem.div [Attr.class' "visible content"] [visible]
             ]
     /// class: [Left;Right_Pointing;Icon]
-    let make_labeled (class_:Button_Attribute_Keyword list) atts_list (label_text_node:XmlNode) (button_node_list :XmlNode list)=
+    let make_labeled (class_:Button_cls list) atts_list (label_text_node:XmlNode) (button_node_list :XmlNode list)=
         let is_left=class_|>List.contains Left
         let cls= 
             if is_left then "ui left labeled button" else "ui labeled button"
@@ -94,21 +98,21 @@ module Button=
             if is_left then [a_;div_] else [div_;a_;]
         Elem.div atts_list children
     /// class_: B_Color
-    let make_icon (class_:Button_Attribute_Keyword list) (icon_:XmlNode) atts_list children_list=
+    let make_icon (class_:Button_cls list) (icon_:XmlNode) atts_list children_list=
         let cls= 
             class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" icon button"|> Attr.class'        
         let atts_list= [cls] @ atts_list          
         let children_list =  [ icon_  ] @ children_list       
         Elem.div atts_list children_list
     /// class_: B_Color
-    let make_grouped (class_:Button_Attribute_Keyword list) atts_list children_list=
+    let make_grouped (class_:Button_cls list) atts_list children_list=
         let cls= 
             class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" buttons"|> Attr.class'        
         let atts_list= [cls] @ atts_list          
         let children_list =  children_list       
         Elem.div atts_list children_list
     /// class_: B_Color
-    let make_grouped_icon (class_:Button_Attribute_Keyword list) atts_list children_list=
+    let make_grouped_icon (class_:Button_cls list) atts_list children_list=
         let cls= 
             class_|>List.map (fun i ->i.ToString()) |>List.fold (fun s t -> s+t) "ui" |>fun i -> i+" icon buttons"|> Attr.class'        
         let atts_list= [cls] @ atts_list          

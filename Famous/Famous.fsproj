@@ -13,8 +13,8 @@
     <Compile Include="Template.fs" />
     <Compile Include="Elements\Button.fs" />
     <Compile Include="Collections\a.fs" />
+    <Compile Include="Views\Advertisement.fs" />
     <Compile Include="Modules\Modal.fs" />
-    <Compile Include="Views\b.fs" />
   </ItemGroup>
 
   <ItemGroup>

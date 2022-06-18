@@ -4,10 +4,14 @@ open Falco
 type JS_event =
     |Click
     |Keyup
+    |OnApprove
+    |OnDeny
     override t.ToString()=
         match t with
         |Click-> "click"
         |Keyup-> "keyup"
+        |OnApprove-> "onApprove"
+        |OnDeny-> "onDeny"
 [<RequireQualifiedAccess>]
 module JS=
     let make (js:string) =

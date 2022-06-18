@@ -9,4 +9,8 @@ module Kit=
         new string(stringChars)
     let inline getId_Attr()=getRandomString(24)|>Attr.id
     let inline getId()=getRandomString(24)
-    
+    let inline get_cls (classes_:_ list) =   
+        classes_
+        |>List.map (fun i ->i.ToString()) 
+        |>List.fold (fun s t -> s + " " + t) " "
+        |>fun r -> r + " "
