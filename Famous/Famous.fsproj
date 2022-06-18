@@ -11,8 +11,10 @@
     <Compile Include="Color.fs" />
     <Compile Include="Size.fs" />
     <Compile Include="Template.fs" />
-    <Compile Include="Button.fs" />
-    <Compile Include="Modal.fs" />
+    <Compile Include="Elements\Button.fs" />
+    <Compile Include="Collections\a.fs" />
+    <Compile Include="Modules\Modal.fs" />
+    <Compile Include="Views\b.fs" />
   </ItemGroup>
 
   <ItemGroup>
